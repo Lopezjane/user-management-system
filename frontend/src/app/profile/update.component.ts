@@ -24,15 +24,17 @@ export class UpdateComponent implements OnInit {
 
     ngOnInit() {
         this.account = this.accountService.accountValue;
+        
+        // Initialize the form with existing account values
         this.form = this.formBuilder.group({
-            title: [this.account.title, Validators.required],
-            firstName: [this.account.firstName, Validators.required],
-            lastName: [this.account.lastName, Validators.required],
-            email: [this.account.email, [Validators.required, Validators.email]],
+            title: [this.account?.title || '', Validators.required],
+            firstName: [this.account?.firstName || '', Validators.required],
+            lastName: [this.account?.lastName || '', Validators.required],
+            email: [this.account?.email || '', [Validators.required, Validators.email]],
             password: ['', [Validators.minLength(6)]],
             confirmPassword: ['']
         }, {
-            validator: MustMatch('password', 'confirmPassword')
+            validators: MustMatch('password', 'confirmPassword')
         });
     }
 
@@ -66,7 +68,7 @@ export class UpdateComponent implements OnInit {
     }
 
     onDelete() {
-        if (confirm('Are you sure?')) {
+        if (confirm('Are you sure you want to delete your account?')) {
             this.deleting = true;
             this.accountService.delete(this.account.id)
                 .pipe(first())
