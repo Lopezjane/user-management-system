@@ -33,6 +33,11 @@ A full-stack backend system for managing user accounts, including registration, 
 
 ---
 
+## locate the backend folder
+```bash
+cd backend
+```
+
 ## ⚙️ Setup Instructions
 
 ### 1. 📦 Install dependencies
